@@ -11,10 +11,7 @@
 
 <div class="content-container">
   <div class="content-title-group not-found">
-    <h2 class="title">Product Wish List</h2>
-    <p>
-      Tekst ændret for at teste git push to deploy
-    </p>
+    <h2 class="title">People registered</h2>
     <p>
       Load people from azure function
     </p>
@@ -31,7 +28,7 @@
     </ul>
     {:else}
     <p>loading...</p>
-    {/if}}
+    {/if}
     </p>
   </div>
 </div>
