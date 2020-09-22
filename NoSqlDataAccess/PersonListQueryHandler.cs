@@ -17,7 +17,7 @@ namespace NoSqlDataAccess
 
         public async Task<Person[]> Handle(PersonListQuery query)
         {
-            var sqlQueryText = "SELECT * FROM c";
+            var sqlQueryText = "SELECT TOP 20 * FROM c";
 
             QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
             FeedIterator<Person> queryResultSetIterator = this.container.GetItemQueryIterator<Person>(queryDefinition);
