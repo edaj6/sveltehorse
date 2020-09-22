@@ -32,8 +32,7 @@ namespace AzureFunctions
             });
 
             var config = new ConfigurationBuilder()                   
-                   .SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("appsettings.json", false)
+                   .SetBasePath(Directory.GetCurrentDirectory())                  
                    .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
                    .AddEnvironmentVariables()
                    .Build();
