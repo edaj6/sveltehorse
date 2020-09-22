@@ -1,45 +1,37 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using System.Net.Http;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AzureFunctions
 {
     public class HttpTrigger1
     {
-        private readonly HttpClient _client;
-        private readonly IMyService _service;
+        private readonly IQueryHandler<PersonListQuery, Task<Person[]>> queryHandler;
 
-        public HttpTrigger1(HttpClient httpClient, IMyService service)
+        public HttpTrigger1(IQueryHandler<PersonListQuery, Task<Person[]>> queryHandler)
         {
-            this._client = httpClient;
-            this._service = service;
+            this.queryHandler = queryHandler ?? 
+                throw new System.ArgumentNullException(nameof(queryHandler));
         }
 
         [FunctionName("Person")]
-        public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
-            var response = await _client.GetAsync("https://microsoft.com");
-            var message = _service.GetPersons();
+            var people = await queryHandler.Handle(new PersonListQuery());
 
-            var result = new { Message = message, value = "Just added 22-9-20 10:14", Details = "Response from httprequest microsoft.com",  Response = response };
+            var result = (from p in people
+                          select new
+                          {
+                              p.FirstName,
+                              p.LastName,
+                              p.Birthday
+                          });
 
             return new OkObjectResult(result);
         }
-
-        //[FunctionName("Person")]
-        //public async Task<IActionResult> RunPerson(
-        //    [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-        //    ILogger log)
-        //{  
-
-        //    return new OkObjectResult(result);
-        //}
-
     }
 }
