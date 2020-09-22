@@ -1,11 +1,11 @@
 <script>
   import { onMount } from 'svelte';
 
-  let info;
+  let people;
 
 	onMount(async () => {
-		const response = await fetch(`https://azurefunctionapp120200917114555.azurewebsites.net/api/hellojson?name=World`);
-		info = await response.json();
+		const response = await fetch(`https://sveltehorsefunctionapp.azurewebsites.net/api/person`);
+		people = await response.json();
   });
 </script>
 
@@ -16,13 +16,22 @@
       Tekst ændret for at teste git push to deploy
     </p>
     <p>
-     This project was created to help represent a fundamental app written with
-      Svelte.
+      Load people from azure function
     </p>
     <br />
-    <h2 class="title">Resources</h2>
+    <h2 class="title">People</h2>
     <p>
-     { info.message }
+    {#if people}
+    <ul>
+	    {#each people as { firstName, lastName, birthday }, i}
+		  <li>
+        {i + 1}: {firstName} {lastName} - {birthday}
+		  </li>
+	    {/each}
+    </ul>
+    {:else}
+    <p>loading...</p>
+    {/if}}
     </p>
   </div>
 </div>
