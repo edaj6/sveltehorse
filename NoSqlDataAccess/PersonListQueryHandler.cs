@@ -1,5 +1,7 @@
-﻿using Microsoft.Azure.Cosmos;
+﻿using Domain;
+using Microsoft.Azure.Cosmos;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace NoSqlDataAccess
