@@ -20,6 +20,6 @@
   <p class="menu-label">Menu</p>
   <ul class="menu-list">
     <Link to="/products" {getProps}>Products</Link>
-    <Link to="/about" {getProps}>About</Link>
+    <Link to="/people" {getProps}>People</Link>
   </ul>
 </nav>

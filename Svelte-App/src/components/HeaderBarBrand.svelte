@@ -8,7 +8,7 @@
   </a>
   <router-link to="/" class="navbar-item nav-home">
     <span class="brand-first">MIN</span>
-    <span class="brand-second">SHOPPING</span>
-    <span class="brand-third">LISTE</span>
+    <span class="brand-second">KOMMUNE</span>
+    <span class="brand-third">COVID19</span>
   </router-link>
 </div>

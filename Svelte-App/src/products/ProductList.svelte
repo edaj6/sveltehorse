@@ -28,7 +28,7 @@
 
 <div>
   {#if !products.length}
-    <div>Loading data ...</div>
+    <div>Loading data ... will never load since no js api</div>
   {/if}
   <ul class="list">
     {#each products as { id, name, description }, i (id)}
