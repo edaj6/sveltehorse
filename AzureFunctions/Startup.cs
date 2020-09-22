@@ -26,11 +26,6 @@ namespace AzureFunctions
         {
             builder.Services.AddHttpClient();
 
-            builder.Services.AddSingleton<IMyService>((s) =>
-            {
-                return new MyService();
-            });
-
             var config = new ConfigurationBuilder()                   
                    .SetBasePath(Directory.GetCurrentDirectory())                  
                    .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
