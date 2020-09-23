@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace AzureFunctions
 {
-    public class HttpTrigger1
+    public class HttpTriggerPerson
     {
         private readonly IQueryHandler<PersonListQuery, Task<Person[]>> queryHandler;
 
-        public HttpTrigger1(IQueryHandler<PersonListQuery, Task<Person[]>> queryHandler)
+        public HttpTriggerPerson(IQueryHandler<PersonListQuery, Task<Person[]>> queryHandler)
         {
             this.queryHandler = queryHandler ?? 
                 throw new System.ArgumentNullException(nameof(queryHandler));
         }
 
         [FunctionName("Person")]
-        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
+        public async Task<IActionResult> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
         {
             var people = await queryHandler.Handle(new PersonListQuery());
 
