@@ -1,16 +1,12 @@
 <script>
   import { onMount } from 'svelte';
-  import { blur, slide, scale, fade, fly } from "svelte/transition";
+  import SectionTitle from './components/Title.svelte';
+  import { fade } from 'svelte/transition';
   let title = 'Smartlearning demo';
-
 </script>
 
-<div class="content-container">
-<div class="content-title-group">
-    <h2 class="title">Smartlearning demo</h2>
+<section>
+  <SectionTitle {title} />
+  <h3 transition:fade>Frontend Svelte, backend dot net azure function</h3>
 
-<h3 transition:fade>Frontend SvelteComponent, backend dot net azure function</h3>
-</div>
-</div>
-
-
+</section>
