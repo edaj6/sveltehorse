@@ -1,8 +1,8 @@
 <script>
   import './styles.scss';
   import { Router, Link, Route } from 'svelte-routing';
+  import Start from './Start.svelte';
   import People from './People.svelte';
-  import Products from './products/Products.svelte';
 
   import { HeaderBar, NavBar, PageNotFound, Redirect } from './components';
 
@@ -16,9 +16,9 @@
     <main class="column">
       <div>
         <Route path="/">
-          <Redirect path="/products" />
+          <Redirect path="/start" />
         </Route>
-        <Route path="/products" component={Products} />
+        <Route path="/start" component={Start} />
         <Route path="/people" component={ People } />
         <Route path="**" component={PageNotFound} />
       </div>
