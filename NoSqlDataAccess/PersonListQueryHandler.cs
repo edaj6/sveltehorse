@@ -30,13 +30,6 @@ namespace NoSqlDataAccess
                 FeedResponse<Person> currentResultSet = await queryResultSetIterator.ReadNextAsync();
                 persons.AddRange(currentResultSet);
             }
-
-            var p = persons.Where(q => q.Birthday == "260496");
-            foreach (var item in p)
-            {
-                item.Url = "https://storagejakob.blob.core.windows.net/blob-container-test/shutterstock_228062275.png";
-                await container.UpsertItemAsync(item, new PartitionKey(item.Birthday));
-            }
             
             return persons.ToArray();
         }
