@@ -2,6 +2,7 @@
 using Microsoft.Azure.Cosmos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NoSqlDataAccess
@@ -30,6 +31,13 @@ namespace NoSqlDataAccess
                 persons.AddRange(currentResultSet);
             }
 
+            var p = persons.Where(q => q.Birthday == "260496");
+            foreach (var item in p)
+            {
+                item.Url = "https://storagejakob.blob.core.windows.net/blob-container-test/shutterstock_228062275.png";
+                await container.UpsertItemAsync(item, new PartitionKey(item.Birthday));
+            }
+            
             return persons.ToArray();
         }
     }

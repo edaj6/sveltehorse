@@ -28,7 +28,8 @@ namespace AzureFunctions
                           {
                               p.FirstName,
                               p.LastName,
-                              p.Birthday
+                              p.Birthday,
+                              p.Url
                           });
 
             return new OkObjectResult(result);

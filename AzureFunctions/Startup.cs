@@ -32,7 +32,8 @@ namespace AzureFunctions
                    .AddEnvironmentVariables()
                    .Build();
 
-            var secretCosmosKey = config["Cosmos:Key"];            
+            var secretCosmosKey = config["Cosmos:Key"];    
+            
             builder.Services.AddSingleton<Container>(InitializeCosmosClientInstanceAsync(secretCosmosKey).GetAwaiter().GetResult());
             builder.Services.AddSingleton<IQueryHandler<PersonListQuery, Task<Person[]>>, PersonListQueryHandler>();
         }

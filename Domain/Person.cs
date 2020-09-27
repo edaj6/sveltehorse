@@ -24,6 +24,9 @@ namespace Domain
         [DisplayName("Fødselsdag")]
         public string Birthday { get; set; }
 
+        [JsonProperty(PropertyName = "url")]
+        public string Url { get; set; }
+
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
