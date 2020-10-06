@@ -1,15 +1,12 @@
 ﻿using AzureFunctions;
 using Domain;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NSubstitute;
-using NSubstitute.Core.Arguments;
-using NSubstitute.Extensions;
 using NUnit.Framework;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,9 +27,20 @@ namespace AzureFunctionApp1.Tests
             var result = await sut.Run(httpReq) as OkObjectResult;            
             var json = JsonConvert.SerializeObject(result.Value);
             var persons = JsonConvert.DeserializeObject<Person[]>(json);
+            var p = persons.FirstOrDefault();
 
-            Assert.AreEqual("Mogens", persons.FirstOrDefault().FirstName);
-            Assert.AreEqual(null, persons.FirstOrDefault().CprNo);
+            p.FirstName.Should().Be("Mogens");
+            p.CprNo.Should().Be(null);
+        }
+
+        [Test]
+        public void Ctor_WithQueryNull_Throws()
+        {
+            Action act = () => new HttpTriggerPerson(null);
+
+            act.Should()
+                .Throw<ArgumentNullException>()
+                .WithMessage("*queryHandler*");
         }
     }
 }
