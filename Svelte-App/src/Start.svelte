@@ -7,6 +7,6 @@
 
 <section>
   <SectionTitle {title} />
-  <h3 transition:fade>Frontend Svelte, backend dot net azure function</h3>
+  <h3 transition:fade>Frontend Svelte, backend dot net azure function/web service for identity server login</h3>
 
 </section>
